@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-size: 62.5%;
+        font-family: Calibri, sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        height: 100vh;
+      }
+      div.container-404 {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      div.container-404 img {
+        width: 60%;
+        font-size: 20rem;
+      }
+      div.container-404 .oops-text {
+        font-size: 20vw;
+        text-align: center;
+        background-color: #08aeea;
+        background-image: linear-gradient(315deg, #08aeea 0%, #2af598 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bolder;
+      }
+      div.container-404 .msg-text {
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      div.container-404 .discription {
+        font-size: 1.5rem;
+      }
+      div.container-404 .homepage-link {
+        background: linear-gradient(90deg, #16dcbb, #17d69a);
+        color: white;
+        text-decoration: none;
+        padding: 15px 20px;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        border-radius: 100px;
+        margin-top: 20px;
+        box-shadow: 0 2px 5px #2af59a85;
+      }
+    </style>
+    <title>nearMed | 404 Not Found</title>
+  </head>
+  <body>
+    <div class="container-404">
+      <span class="oops-text">Oops!</span>
+      <span class="msg-text">404 - page not found</span>
+      <span class="discription"
+        >The page you are looking for might not be found!</span
+      >
+      <a href="/" class="homepage-link">Go to Homepage</a>
+    </div>
+  </body>
+</html>
