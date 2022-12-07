@@ -14,7 +14,7 @@ const mailService = {
     await transporter.sendMail({
       from: `"Abhishek GUPTA" <osmmediaplatform@gmail.com>`,
       to: toMail,
-      subject: "OTP from nearMed",
+      subject: "nearMed Registration OTP.",
       html: `<h1>OTP:${mailContent}</h1>`,
     });
     return 200;
