@@ -16,6 +16,7 @@ dashboardRoute.post("/user/dashboard", async function (req, res) {
     email: req.body.email,
     password: req.body.pass,
   });
+  if (!user) return res.status(403).json({ msg: "not allowed!" });
   let shopId = (
     await shopModel.findOne({
       userId: user._id,
