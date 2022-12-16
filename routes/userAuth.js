@@ -1,5 +1,4 @@
 const userAuthRoute = require("express").Router();
-const mongoose = require("mongoose");
 const userModel = require("../models/userinfo");
 
 userAuthRoute.post("/user/auth", async function (req, res) {

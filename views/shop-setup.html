@@ -4,7 +4,7 @@
     <script>
       async function load() {
       let email = sessionStorage.getItem("email") || localStorage.getItem("email");
-      let pass = sessionStorage.getItem("password") || localStorage.getItem("password");
+      let pass = sessionStorage.getItem("pass") || localStorage.getItem("pass");
       let res = await fetch('/user/auth',{
           method:'POST',
           headers:{
@@ -19,6 +19,7 @@
         return window.location.assign("/login");
       }
       if(res.shop){
+        console.log(res.shop);
           window.location.assign('/user/dashboard')
       }
     }
@@ -277,8 +278,10 @@ window.initMap = initMap;
             },
             body:JSON.stringify({name,city,dist,state,pin,coord,email,password})
             }).then(res=>res.json());
-            if(res.status==='ok')
+            if(res.status==='ok'){
+              console.log(res);
             window.location.assign('/user/dashboard')
+          }
         })
         
     let logOut = document.getElementById("logout");
