@@ -3,7 +3,10 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const app = express();
 
-dotenv.config();
+console.log(dotenv.config());
+
+const medInfoModel = require("./models/medinfo");
+
 const dashboardRouter = require("./routes/dashboard");
 const homeRouter = require("./routes/home");
 const loginRouter = require("./routes/login");
@@ -22,6 +25,13 @@ app.use(registrationRouter);
 app.use(shopSetupRouter);
 app.use(userAuthRouter);
 app.use(otpRouter);
+
+//for experimental purpose only
+
+app.use("/search/all", async (req, res) => {
+  const result = await medInfoModel.find({ name: req.query.itemName });
+  res.json(result);
+});
 app.use((req, res) => res.sendFile(__dirname + "/views/404Page.html"));
 
 app.listen(port);
