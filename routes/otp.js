@@ -9,23 +9,42 @@ otpRoute.get("/register/otp", function (req, res) {
     root: "./",
   });
 });
-otpRoute.post("/register/mail", function (req, res) {
-  otp = parseInt(Math.random() * 1000000);
-  mailService.sendMail(req.body.email, otp);
-  console.log(otp);
-  return res.json({ ok: true });
-});
-otpRoute.post("/register/otp", async function (req, res) {
-  console.log(otp, req.body.otp);
-  if (otp === Number(req.body.otp)) {
-    await userModel.create({
-      name: req.body.fullname,
-      email: req.body.email,
-      password: req.body.pass,
-    });
+
+otpRoute.post("/register/mail", async function (req, res) {
+  try {
+    const otp = generateOTP(); // Securely generate OTP
+    await mailService.sendMail(req.body.email, otp);
+    req.session.otp = otp; // Store OTP in session
     return res.json({ ok: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, error: "Failed to send OTP email." });
   }
-  return res.json({ ok: false });
 });
 
+otpRoute.post("/register/otp", async function (req, res) {
+  try {
+    const storedOTP = req.session.otp;
+    const enteredOTP = Number(req.body.otp);
+    if (storedOTP === enteredOTP) {
+      await userModel.create({
+        name: req.body.fullname,
+        email: req.body.email,
+        password: req.body.pass,
+      });
+      return res.json({ ok: true });
+    } else {
+      return res.json({ ok: false, error: "Invalid OTP." });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, error: "An error occurred." });
+  }
+});
+
+function generateOTP() {
+  return Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
+}
+
 module.exports = otpRoute;
+
